@@ -6,6 +6,11 @@ const tasksController = require('./controllers/tasksController');
 const tasksMiddleware = require('./middlewares/TasksMiddlewares')
 
 router.get('/tasks', tasksController.getAll);
-router.post('/tasks', tasksMiddleware.validateBody, tasksController.createTasks);
+router.post('/tasks', tasksMiddleware.validateFieldTitle, tasksController.createTasks);
+router.delete('/tasks/:id', tasksController.deleteTask);
+router.put('/tasks/:id',
+     tasksMiddleware.validateFieldTitle,
+     tasksMiddleware.validateFieldStatus,
+      tasksController.updateTask);
 
 module.exports = router;
